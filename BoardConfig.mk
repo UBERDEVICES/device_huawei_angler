@@ -152,3 +152,8 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
 # Use kernel headers for some HALs
 TARGET_COMPILE_WITH_MSM_KERNEL := true
+
+# Set HALs path
+$(call project-set-path,qcom-audio,hardware/qcom/audio)
+$(call project-set-path,qcom-display,hardware/qcom/display-caf/$(TARGET_BOARD_PLATFORM))
+$(call project-set-path,qcom-media,hardware/qcom/media-caf)
