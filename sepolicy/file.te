@@ -1,4 +1,5 @@
 type diag_logs, file_type, data_file_type, mlstrustedobject;
+type debugfs_rmts, debugfs_type, fs_type;
 
 type perfd_data_file, file_type, data_file_type;
 type persist_audio_file, file_type;

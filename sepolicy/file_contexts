@@ -39,6 +39,7 @@
 # Sysfs files used by qmuxd
 /sys/devices/virtual/smdpkt/smdcntl([0-9])+/open_timeout                                                   u:object_r:sysfs_smdcntl_open_timeout:s0
 
+/sys/kernel/debug/rmt_storage/rmts                                  u:object_r:debugfs_rmts:s0
 /sys/kernel/range/enable_ps_sensor                                  u:object_r:sysfs_prox_snsr:s0
 /sys/module/cpu_boost(/.*)?                                         u:object_r:sysfs_devices_system_cpu:s0
 /sys/module/lpm_levels/parameters/sleep_disabled                    u:object_r:sysfs_power_management:s0
