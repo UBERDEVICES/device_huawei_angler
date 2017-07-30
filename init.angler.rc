@@ -308,7 +308,7 @@ service per_proxy /vendor/bin/pm-proxy
 service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
-    group system wakelock
+    group root system wakelock
     writepid /dev/cpuset/system-background/tasks
 
 service qseecomd /vendor/bin/qseecomd
@@ -367,11 +367,11 @@ service loc_launcher /vendor/bin/loc_launcher
     writepid /dev/cpuset/system-background/tasks
 
 # bugreport is triggered by holding down volume down, volume up and power
-service bugreport /system/bin/dumpstate -d -p -B -z \
-        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
-    class main
-    disabled
-    oneshot
+# service bugreport /system/bin/dumpstate -d -p -B -z \
+#        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
+#   class main
+#   disabled
+#   oneshot
 
 # start camera server as daemon
 service qcamerasvr /vendor/bin/mm-qcamera-daemon
@@ -481,10 +481,10 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.
     writepid /dev/cpuset/system-background/tasks
 
 #start atfwd as daemon
-service atfwd /vendor/bin/ATFWD-daemon
-    class late_start
-    user system
-    group system radio
+#   service atfwd /vendor/bin/ATFWD-daemon
+#   class late_start
+#   user system
+#   group system radio
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
@@ -495,11 +495,11 @@ service ppd /system/bin/mm-pp-daemon
 on property:init.svc.surfaceflinger=stopped
     stop ppd
 
-service diag_test_server /vendor/bin/diag_test_server
-    class core
-    user root
-    disabled
+# service diag_test_server /vendor/bin/diag_test_server
+#   class core
+#   user root
+#   disabled
 
-on property:ro.boot.mode=hw-factory
-    start diag_test_server
+# on property:ro.boot.mode=hw-factory
+#   start diag_test_server
 
