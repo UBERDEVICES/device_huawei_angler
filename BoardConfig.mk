@@ -47,6 +47,8 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/huawei/angler/bluetooth
 
+# BOARD_SUPPORTS_SOUND_TRIGGER := true
+
 BOARD_USES_SECURE_SERVICES := true
 
 TARGET_NO_BOOTLOADER := true
@@ -79,15 +81,6 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 # Enable auto suspend in poweroff charging to save power
 BOARD_CHARGER_ENABLE_SUSPEND := true
-
-# Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
-    ifeq ($(WITH_DEXPREOPT),)
-      WITH_DEXPREOPT := true
-    endif
-  endif
-endif
 
 # Needed for VoLTE
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
@@ -141,8 +134,6 @@ BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 
 #NFC
 NXP_CHIP_TYPE := 2
-
--include vendor/huawei/angler/BoardConfigVendor.mk
 
 # Inline kernel building
 TARGET_GCC_VERSION_ARM64 := 6.x
