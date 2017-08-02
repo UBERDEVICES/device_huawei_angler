@@ -5,7 +5,7 @@ LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 # Too many clang warnings/errors, see b/23163853.
-LOCAL_CLANG := false
+# LOCAL_CLANG := false
 
 LOCAL_SRC_FILES := \
         util/QCameraCmdThread.cpp \
@@ -38,13 +38,10 @@ LOCAL_SRC_FILES += \
         HAL/QCameraParameters.cpp \
         HAL/QCameraThermalAdapter.cpp
 
-LOCAL_CFLAGS := -Wall -Wextra -Werror
+LOCAL_CFLAGS := -Wall -Wextra -Werror -Wno-tautological-pointer-compare
 LOCAL_CFLAGS += -DHAS_MULTIMEDIA_HINTS
 LOCAL_CFLAGS += -DENABLE_MODEL_INFO_EXIF
-
-ifeq ($(TARGET_USES_AOSP),true)
 LOCAL_CFLAGS += -DVANILLA_HAL
-endif
 
 #HAL 1.0 Flags
 LOCAL_CFLAGS += -DDEFAULT_DENOISE_MODE_ON -DHAL3
@@ -53,7 +50,7 @@ LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/stack/common \
         frameworks/native/include/media/hardware \
         frameworks/native/include/media/openmax \
-        hardware/qcom/media/msm8974/libstagefrighthw \
+        hardware/qcom/media-caf/msm8994/libstagefrighthw \
         system/media/camera/include \
         $(LOCAL_PATH)/../mm-image-codec/qexif \
         $(LOCAL_PATH)/../mm-image-codec/qomx_core \
@@ -65,6 +62,7 @@ LOCAL_C_INCLUDES += \
         device/huawei/angler/camera/QCamera2/HAL
 
 LOCAL_C_INCLUDES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+LOCAL_ADDITIONAL_DEPENDENCIES += $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
 #LOCAL_STATIC_LIBRARIES := libqcamera2_util
 LOCAL_C_INCLUDES += \
