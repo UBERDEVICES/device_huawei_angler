@@ -129,7 +129,7 @@ BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 NXP_CHIP_TYPE := 2
 
 # Inline kernel building
-TARGET_GCC_VERSION_ARM64 := 6.x
+TARGET_GCC_VERSION_ARM64 := 7.x
 TARGET_KERNEL_SOURCE := kernel/huawei/angler
 TARGET_KERNEL_CONFIG := angler_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
