@@ -136,7 +136,7 @@ on boot
 
     write /sys/block/mmcblk0/queue/rq_affinity 0
     write /sys/block/mmcblk0/queue/scheduler fiops
-    write /sys/block/mmcblk0/queue/read_ahead_kb 128
+    write /sys/block/mmcblk0/queue/read_ahead_kb 512
 
     # TapToWake
     chown system system /sys/devices/soc.0/f9924000.i2c/i2c-2/2-0070/input/input0/wake_gesture
@@ -166,6 +166,14 @@ on post-fs-data
 
     #Create folder for mm-qcamera-daemon
     mkdir /data/misc/camera 0770 camera camera
+
+    # change permission for ldaf
+    chown input system /persist/data/calibration
+    chmod 0650 /persist/data/calibration
+    chown input system /persist/data/calibration/offset
+    chmod 0640 /persist/data/calibration/offset
+    chown input system /persist/data/calibration/xtalk
+    chmod 0640 /persist/data/calibration/xtalk
 
     #Create folder for display calibration data
     mkdir /data/misc/display 0770 system graphics
@@ -338,11 +346,11 @@ service qmuxd /vendor/bin/qmuxd
     group radio audio bluetooth wakelock gps
     writepid /dev/cpuset/system-background/tasks
 
-service perfd /vendor/bin/perfd
-    class main
-    user root
-    group system
-    writepid /dev/cpuset/system-background/tasks
+# service perfd /vendor/bin/perfd
+#    class main
+#    user root
+#    group system
+#    writepid /dev/cpuset/system-background/tasks
 
 service netmgrd /vendor/bin/netmgrd
     class main
@@ -480,11 +488,11 @@ service msm_irqbalance /vendor/bin/msm_irqbalance -f /vendor/etc/msm_irqbalance.
     group root
     writepid /dev/cpuset/system-background/tasks
 
-#start atfwd as daemon
-#   service atfwd /vendor/bin/ATFWD-daemon
-#   class late_start
-#   user system
-#   group system radio
+# start atfwd as daemon
+service atfwd /vendor/bin/ATFWD-daemon
+    class late_start
+    user system
+    group system radio
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
