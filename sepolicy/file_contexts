@@ -28,6 +28,13 @@
 /sys/devices/soc\.0/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/dispatch/inflight                                 u:object_r:sysfs_gpu_tuning:s0
 /sys/devices/soc\.0/fdb00000.qcom,kgsl-3d0/kgsl/kgsl-3d0/dispatch/inflight_low_latency                     u:object_r:sysfs_gpu_tuning:s0
 
+# /persist(/.*)?                                                      u:object_r:persist_file:s0
+/persist/audio(/.*)?                                                u:object_r:persist_audio_file:s0
+#/persist/data(/.*)?                                                 u:object_r:persist_data_file:s0
+#/persist/data/sfs(/.*)?                                             u:object_r:persist_drm_file:s0
+#/persist/data/tz(/.*)?                                              u:object_r:persist_drm_file:s0
+#/persist/sensors(/.*)?                                              u:object_r:persist_sensors_file:s0
+
 # Sysfs files used by fingerprintd
 /sys/devices/soc\.0/fpc1020\.[0-9]+(/.*)?                           u:object_r:sysfs_fingerprintd:s0
 
@@ -39,7 +46,7 @@
 # Sysfs files used by qmuxd
 /sys/devices/virtual/smdpkt/smdcntl([0-9])+/open_timeout                                                   u:object_r:sysfs_smdcntl_open_timeout:s0
 
-/sys/kernel/debug/rmt_storage/rmts                                  u:object_r:debugfs_rmts:s0
+/sys/kernel/debug/rmt_storage(/.*)?                                 u:object_r:debugfs_rmts:s0
 /sys/kernel/range/enable_ps_sensor                                  u:object_r:sysfs_prox_snsr:s0
 /sys/module/cpu_boost(/.*)?                                         u:object_r:sysfs_devices_system_cpu:s0
 /sys/module/lpm_levels/parameters/sleep_disabled                    u:object_r:sysfs_power_management:s0
@@ -83,6 +90,7 @@
 # Data files
 /data/fpc(/.*)?                  u:object_r:fingerprintd_data_file:s0
 /data/misc/perfd(/.*)?           u:object_r:perfd_data_file:s0
+# /data/time(/.*)?                 u:object_r:time_data_file:s0
 
 #wifi sar
 /sys/module/wifi_sar/parameters/wifi_tx_power_limit                u:object_r:sysfs_wifi_sar:s0
