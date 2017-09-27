@@ -182,15 +182,6 @@ on post-fs-data
     mkdir /data/time/ 0700 system system
     mkdir /data/audio/ 0770 media audio
 
-    # Create folder for perf daemon
-    mkdir /data/misc/perfd 0755 root system
-    chmod 2755 /data/misc/perfd
-    mkdir /data/system/perfd 0770 root system
-    rm /data/system/perfd/default_values
-    chmod 2770 /data/system/perfd
-    setprop ro.min_freq_0 384000
-    setprop ro.min_freq_4 384000
-
     # Create the directories used by CnE subsystem
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
@@ -345,12 +336,6 @@ service qmuxd /vendor/bin/qmuxd
     user radio
     group radio audio bluetooth wakelock gps
     writepid /dev/cpuset/system-background/tasks
-
-# service perfd /vendor/bin/perfd
-#    class main
-#    user root
-#    group system
-#    writepid /dev/cpuset/system-background/tasks
 
 service netmgrd /vendor/bin/netmgrd
     class main
