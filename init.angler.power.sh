@@ -20,13 +20,6 @@ function get-set-forall() {
 
 ################################################################################
 
-# disable thermal bcl hotplug to switch governor
-write /sys/module/msm_thermal/core_control/enabled 0
-get-set-forall /sys/devices/soc.0/qcom,bcl.*/mode disable
-bcl_hotplug_mask=`get-set-forall /sys/devices/soc.0/qcom,bcl.*/hotplug_mask 0`
-bcl_hotplug_soc_mask=`get-set-forall /sys/devices/soc.0/qcom,bcl.*/hotplug_soc_mask 0`
-get-set-forall /sys/devices/soc.0/qcom,bcl.*/mode enable
-
 # some files in /sys/devices/system/cpu are created after the restorecon of
 # /sys/. These files receive the default label "sysfs".
 # Restorecon again to give new files the correct label.
@@ -105,13 +98,6 @@ get-set-forall  /sys/class/devfreq/qcom,cpubw*/governor bw_hwmon
 
 # Disable sched_boost
 write /proc/sys/kernel/sched_boost 0
-
-# re-enable thermal and BCL hotplug
-write /sys/module/msm_thermal/core_control/enabled 1
-get-set-forall /sys/devices/soc.0/qcom,bcl.*/mode disable
-get-set-forall /sys/devices/soc.0/qcom,bcl.*/hotplug_mask $bcl_hotplug_mask
-get-set-forall /sys/devices/soc.0/qcom,bcl.*/hotplug_soc_mask $bcl_hotplug_soc_mask
-get-set-forall /sys/devices/soc.0/qcom,bcl.*/mode enable
 
 # change GPU initial power level from 305MHz(level 4) to 180MHz(level 5) for power savings
 write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 5
